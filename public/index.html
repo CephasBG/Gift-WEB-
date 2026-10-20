@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101c2e"><title>GestionPro RDC — Gestion d'entreprise</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <section id="auth-screen" class="auth-screen">
+    <div class="auth-brand"><div class="brand-mark">GP</div><div><div class="brand-name">GestionPro <span>RDC</span></div><div class="brand-caption">Pilotez votre entreprise. Simplement.</div></div></div>
+    <div class="auth-layout">
+      <div class="auth-copy"><div class="eyebrow">GESTION D'ENTREPRISE · RDC</div><h1>Tout votre business.<br><span>Un seul endroit.</span></h1><p>Finance, stocks, approvisionnements et flotte réunis dans un espace conçu pour les entreprises congolaises.</p><div class="auth-points"><div><i>✓</i> USD et CDF</div><div><i>✓</i> Interface en français</div><div><i>✓</i> Données séparées par entreprise</div></div><div class="auth-foot">Conçu pour les équipes sur le terrain et au bureau.</div></div>
+      <div class="auth-card"><div class="auth-tabs"><button class="auth-tab active" data-auth-tab="login">Connexion</button><button class="auth-tab" data-auth-tab="signup">Créer une entreprise</button></div>
+        <form id="login-form" class="auth-form"><h2>Bon retour</h2><p>Connectez-vous à votre espace de gestion.</p><label>Adresse e-mail<input name="email" type="email" value="demo@gestionpro.cd" required autocomplete="username"></label><label>Mot de passe<input name="password" type="password" value="GestionPro2026!" required autocomplete="current-password"></label><button class="btn primary wide" type="submit">Se connecter <span>→</span></button><button id="demo-button" class="btn demo wide" type="button">Ouvrir la démonstration</button><div class="demo-hint">Démo : demo@gestionpro.cd · GestionPro2026!</div></form>
+        <form id="signup-form" class="auth-form hidden"><h2>Créer votre espace</h2><p>Votre espace privé de gestion d'entreprise.</p><label>Votre nom<input name="name" required minlength="2" placeholder="Ex. Marie Kabeya"></label><label>Nom de l'entreprise<input name="company" required minlength="2" placeholder="Ex. Katanga Services SARL"></label><label>Adresse e-mail<input name="email" type="email" required autocomplete="email" placeholder="vous@entreprise.cd"></label><label>Mot de passe<input name="password" type="password" required minlength="10" autocomplete="new-password" placeholder="10 caractères minimum"></label><button class="btn primary wide" type="submit">Créer mon espace <span>→</span></button><div class="demo-hint">Cette version locale est un MVP de démonstration.</div></form>
+      </div>
+    </div>
+  </section>
+
+  <div id="app-shell" class="app-shell hidden">
+    <aside class="sidebar" id="sidebar"><div class="sidebar-brand"><div class="brand-mark small">GP</div><div class="brand-name">GestionPro <span>RDC</span></div><button id="sidebar-close" class="icon-btn mobile-only" aria-label="Fermer le menu">×</button></div>
+      <div class="company-switch"><div class="company-avatar">ER</div><div class="company-details"><strong id="company-name">Entreprise</strong><span>Plan entreprise · Local</span></div><span class="chevron">⌄</span></div>
+      <div class="nav-label">ESPACE DE TRAVAIL</div><nav class="main-nav"><button class="nav-item active" data-page="dashboard"><span class="nav-icon">▦</span>Vue d'ensemble</button><button class="nav-item" data-page="finance"><span class="nav-icon">◈</span>Finances <span class="nav-count" id="finance-count">4</span></button><button class="nav-item" data-page="inventory"><span class="nav-icon">▤</span>Stocks & approvisionnement</button><button class="nav-item" data-page="fleet"><span class="nav-icon">▰</span>Flotte & transport</button><button class="nav-item" data-page="suppliers"><span class="nav-icon">♧</span>Fournisseurs <span class="soon">Bientôt</span></button><button class="nav-item" data-page="hr"><span class="nav-icon">♙</span>Personnel <span class="soon">Bientôt</span></button><button class="nav-item" data-page="reports"><span class="nav-icon">▥</span>Rapports</button></nav>
+      <div class="sidebar-bottom"><div class="help-card"><div class="help-icon">✦</div><strong>Besoin d'aide ?</strong><p>Découvrez comment bien démarrer avec GestionPro.</p><button id="help-button">Voir le guide <span>→</span></button></div><button class="nav-item" data-page="settings"><span class="nav-icon">⚙</span>Paramètres</button><div class="user-row"><div class="user-avatar">AD</div><div class="user-info"><strong id="user-name">Administrateur</strong><span id="user-role">Administrateur</span></div><button id="logout-button" class="icon-btn" title="Déconnexion" aria-label="Déconnexion">↪</button></div></div>
+    </aside>
+    <main class="main-area"><header class="topbar"><button id="menu-toggle" class="icon-btn mobile-only" aria-label="Ouvrir le menu">☰</button><div class="breadcrumb">Gestion <span>/</span> <strong id="crumb">Vue d'ensemble</strong></div><div class="top-actions"><div class="status-pill"><span></span> Mode local</div><button id="top-help" class="icon-btn" title="Aide">?</button><div class="top-avatar">AD</div></div></header>
+      <div class="page-wrap"><div id="page-content"></div><footer class="footer"><span>© 2026 GestionPro RDC</span><span>Fait pour les entreprises congolaises <b>♥</b></span><span class="version">MVP 0.1.0 · Simulation locale</span></footer></div>
+    </main>
+  </div>
+  <div id="modal-root"></div>
+  <script src="/app.js" defer></script>
+</body>
+</html>

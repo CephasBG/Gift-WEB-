@@ -1,0 +1,100 @@
+generator client { provider = "prisma-client-js" }
+datasource db { provider = "postgresql"; url = env("DATABASE_URL") }
+
+enum Role {
+  SUPER_ADMIN COMPANY_OWNER GENERAL_MANAGER FINANCE_MANAGER ACCOUNTANT
+  INVENTORY_MANAGER TRANSPORT_MANAGER HR_MANAGER DEPARTMENT_MANAGER EMPLOYEE
+}
+enum Currency { USD CDF }
+
+model Company {
+  id        String   @id @default(cuid())
+  name      String
+  rccm      String?
+  idNat     String?
+  nif       String?
+  timezone  String   @default("Africa/Kinshasa")
+  locale    String   @default("fr-CD")
+  baseCurrency Currency @default(USD)
+  createdAt DateTime @default(now())
+  members   Membership[]
+  rates     ExchangeRate[]
+  audits    AuditLog[]
+  invites   Invitation[]
+}
+
+model User {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  name         String
+  passwordHash String
+  isPlatformAdmin Boolean @default(false)
+  createdAt    DateTime @default(now())
+  memberships  Membership[]
+}
+
+model Membership {
+  id        String  @id @default(cuid())
+  userId    String
+  companyId String
+  role      Role
+  active    Boolean @default(true)
+  // Approval ceiling per currency, in minor units (cents/centimes). null = no approval right.
+  approvalLimitUsd BigInt?
+  approvalLimitCdf BigInt?
+  user      User    @relation(fields: [userId], references: [id])
+  company   Company @relation(fields: [companyId], references: [id])
+  @@unique([userId, companyId])
+  @@index([companyId])
+}
+
+model Invitation {
+  id        String   @id @default(cuid())
+  companyId String
+  email     String
+  role      Role
+  tokenHash String   @unique
+  expiresAt DateTime
+  company   Company  @relation(fields: [companyId], references: [id])
+  @@index([companyId])
+}
+
+// Historical, never overwritten: one row per rate per effective date.
+model ExchangeRate {
+  id        String   @id @default(cuid())
+  companyId String
+  from      Currency
+  to        Currency
+  rate      Decimal  @db.Decimal(18, 6)
+  effectiveAt DateTime
+  createdBy String
+  createdAt DateTime @default(now())
+  company   Company  @relation(fields: [companyId], references: [id])
+  @@unique([companyId, from, to, effectiveAt])
+  @@index([companyId, from, to, effectiveAt])
+}
+
+model AuditLog {
+  id        String   @id @default(cuid())
+  companyId String
+  userId    String?
+  action    String
+  entity    String
+  entityId  String?
+  before    Json?
+  after     Json?
+  ip        String?
+  createdAt DateTime @default(now())
+  company   Company  @relation(fields: [companyId], references: [id])
+  @@index([companyId, createdAt])
+  @@index([companyId, entity, entityId])
+}
+
+// Prevents duplicate transactions / offline-sync replays.
+model IdempotencyKey {
+  companyId String
+  key       String
+  result    Json?
+  createdAt DateTime @default(now())
+  @@id([companyId, key])
+}

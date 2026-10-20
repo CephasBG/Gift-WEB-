@@ -1,0 +1,13 @@
+{
+  "app": { "name": "GestionPro RDC" },
+  "nav": { "dashboard": "Tableau de bord", "finance": "Finances", "inventory": "Stocks et approvisionnements",
+    "fleet": "Transport et flotte", "hr": "Employés et RH", "parties": "Clients et fournisseurs",
+    "reports": "Rapports", "settings": "Paramètres", "users": "Utilisateurs" },
+  "roles": { "SUPER_ADMIN": "Super administrateur", "COMPANY_OWNER": "Propriétaire", "GENERAL_MANAGER": "Directeur général",
+    "FINANCE_MANAGER": "Responsable financier", "ACCOUNTANT": "Comptable", "INVENTORY_MANAGER": "Responsable des stocks",
+    "TRANSPORT_MANAGER": "Responsable transport", "HR_MANAGER": "Responsable RH", "DEPARTMENT_MANAGER": "Chef de département",
+    "EMPLOYEE": "Employé" },
+  "actions": { "view": "Consulter", "create": "Créer", "edit": "Modifier", "delete": "Supprimer", "approve": "Approuver", "export": "Exporter" },
+  "errors": { "forbidden": "Accès refusé", "noRate": "Aucun taux de change défini pour cette date", "currencyMismatch": "Conversion de devise requise" },
+  "common": { "save": "Enregistrer", "cancel": "Annuler", "confirmDelete": "Voulez-vous vraiment supprimer cet élément ?" }
+}
