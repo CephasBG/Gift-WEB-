@@ -1,0 +1,11 @@
+{
+  "name": "gestionpro-rdc",
+  "version": "0.1.0",
+  "private": true,
+  "description": "GestionPro RDC - local runnable business management MVP",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "test": "node --test"
+  }
+}
